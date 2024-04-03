@@ -1,3 +1,10 @@
+import {
+  Table,
+  TableCell,
+  TableHeader,
+  TableHeaderRow,
+  TableRow,
+} from "kubra-ux-forge";
 import ReactDOM from "react-dom/client";
 
 declare let looker: any;
@@ -75,9 +82,32 @@ looker.plugins.visualizations.add({
     let firstRow = data[0];
     const firstCell = firstRow[queryResponse.fields.dimensions[0].name].value;
 
+    const table = (
+      <Table variant={"striped"}>
+        <TableHeaderRow id={"header"}>
+          <TableHeader variant={"text"} text={"Text Header"} />
+          <TableHeader variant={"text"} text={"Text Header"} />
+          <TableHeader variant={"text"} text={"Text Header"} />
+          <TableHeader variant={"text"} text={"Text Header"} />
+        </TableHeaderRow>
+        <TableRow hasHover id={"row_1"}>
+          <TableCell variant={"text"} text={firstCell} />
+          <TableCell variant={"text"} text={"Text Cell"} />
+          <TableCell variant={"text"} text={"Text Cell"} />
+          <TableCell variant={"text"} text={"Text Cell"} />
+        </TableRow>
+        <TableRow hasHover id={"row_2"}>
+          <TableCell variant={"text"} text={"Text Cell"} />
+          <TableCell variant={"text"} text={"Text Cell"} />
+          <TableCell variant={"text"} text={"Text Cell"} />
+          <TableCell variant={"text"} text={"Text Cell"} />
+        </TableRow>
+      </Table>
+    );
+
     // Render to the target element
     let containerRoot = ReactDOM.createRoot(this._container);
-    containerRoot.render(<div>{firstCell}</div>);
+    containerRoot.render(table);
 
     // We are done rendering! Let Looker know.
     done();
