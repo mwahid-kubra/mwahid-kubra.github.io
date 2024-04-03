@@ -12,5 +12,8 @@ export default defineConfig({
       fileName: "bizhq-report-table-viz",
     },
   },
+  define: {
+    "process.env.NODE_ENV": '"production"',
+  },
   plugins: [react()],
 });
