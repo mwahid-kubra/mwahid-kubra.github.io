@@ -52,7 +52,7 @@ looker.plugins.visualizations.add({
   },
   // Render in response to the data or settings changing
   updateAsync: function (
-    data: any,
+    data: Array<any>,
     element: HTMLElement,
     config: any,
     queryResponse: any,
@@ -78,30 +78,34 @@ looker.plugins.visualizations.add({
       return;
     }
 
-    // Grab the first cell of the data
-    let firstRow = data[0];
-    const firstCell = firstRow[queryResponse.fields.dimensions[0].name].value;
+    const tableHeaders: Array<any> = queryResponse.fields.dimensions.map(
+      (dimension: any) => (
+        <TableHeader
+          key={dimension.name}
+          variant="sort"
+          text={dimension.label_short}
+        />
+      )
+    );
+
+    const tableRows = data.map((row: any, index) => (
+      <TableRow id={`row-${index}`} key={`row-${index}`}>
+        {queryResponse.fields.dimensions.map((dimension: any) => (
+          <TableCell
+            key={`${dimension.name}-cell-${index}`}
+            variant="text"
+            text={row[dimension.name].value}
+          />
+        ))}
+      </TableRow>
+    ));
+
+    console.log("tableRows", tableRows);
 
     const table = (
       <Table variant={"striped"}>
-        <TableHeaderRow id={"header"}>
-          <TableHeader variant={"text"} text={"Text Header"} />
-          <TableHeader variant={"text"} text={"Text Header"} />
-          <TableHeader variant={"text"} text={"Text Header"} />
-          <TableHeader variant={"text"} text={"Text Header"} />
-        </TableHeaderRow>
-        <TableRow hasHover id={"row_1"}>
-          <TableCell variant={"text"} text={firstCell} />
-          <TableCell variant={"text"} text={"Text Cell"} />
-          <TableCell variant={"text"} text={"Text Cell"} />
-          <TableCell variant={"text"} text={"Text Cell"} />
-        </TableRow>
-        <TableRow hasHover id={"row_2"}>
-          <TableCell variant={"text"} text={"Text Cell"} />
-          <TableCell variant={"text"} text={"Text Cell"} />
-          <TableCell variant={"text"} text={"Text Cell"} />
-          <TableCell variant={"text"} text={"Text Cell"} />
-        </TableRow>
+        <TableHeaderRow id={"header"}>{tableHeaders}</TableHeaderRow>
+        <>{tableRows}</>
       </Table>
     );
 
