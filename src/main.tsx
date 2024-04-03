@@ -35,10 +35,10 @@ looker.plugins.visualizations.add({
       </style>
     `;
 
-    let container = element.appendChild(document.createElement("div"));
-    container.className = "bizhq-report-table-viz";
+    this._container = element.appendChild(document.createElement("div"));
+    this._container.className = "bizhq-report-table-viz";
 
-    let containerRoot = ReactDOM.createRoot(container);
+    let containerRoot = ReactDOM.createRoot(this._container);
 
     // Render to the target element
     containerRoot.render(<div>Loading...</div>);
@@ -75,10 +75,8 @@ looker.plugins.visualizations.add({
     let firstRow = data[0];
     const firstCell = firstRow[queryResponse.fields.dimensions[0].name].value;
 
-    let container = element.appendChild(document.createElement("div"));
-    let containerRoot = ReactDOM.createRoot(container);
-
     // Render to the target element
+    let containerRoot = ReactDOM.createRoot(this._container);
     containerRoot.render(<div>{firstCell}</div>);
 
     // We are done rendering! Let Looker know.
