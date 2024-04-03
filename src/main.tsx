@@ -35,10 +35,7 @@ looker.plugins.visualizations.add({
         .bizhq-report-table-viz {
           /* Vertical centering */
           height: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          text-align: center;
+          width: 100%;
         }
       </style>
     `;
