@@ -60,6 +60,7 @@ looker.plugins.visualizations.add({
     details: any,
     done: any
   ) {
+    console.log("this", this);
     console.log("data", data);
     console.log("element", element);
     console.log("config", config);
@@ -79,15 +80,16 @@ looker.plugins.visualizations.add({
       return;
     }
 
-    const tableHeaders: Array<any> = queryResponse.fields.dimensions.map(
-      (dimension: any) => (
-        <TableHeader
-          key={dimension.name}
-          variant="sort"
-          text={dimension.label_short}
-        />
-      )
-    );
+    const dimensions: Array<any> = queryResponse.fields.dimensions;
+    const tableHeaders = dimensions.map((dimension: any) => (
+      <TableHeader
+        key={dimension.name}
+        variant="sort"
+        text={dimension.label_short}
+      />
+    ));
+
+    console.log("tableHeaders", tableHeaders);
 
     const tableRows = data.map((row: any, index) => (
       <TableRow id={`row-${index}`} key={`row-${index}`}>
@@ -105,7 +107,12 @@ looker.plugins.visualizations.add({
 
     const table = (
       <Table variant={"striped"}>
-        <TableHeaderRow id={"header"}>{tableHeaders}</TableHeaderRow>
+        <TableHeaderRow
+          id={"header"}
+          onSort={(index, direction) => console.log(index, direction)}
+        >
+          {tableHeaders}
+        </TableHeaderRow>
         <>{tableRows}</>
       </Table>
     );
