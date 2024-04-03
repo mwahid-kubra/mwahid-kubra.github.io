@@ -20633,7 +20633,7 @@ looker.plugins.visualizations.add({
       dimension.name
     ));
     console.log("tableHeaders", tableHeaders);
-    const tableRows = data.map((row, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.TableRow, { id: `row-${index}`, children: queryResponse.fields.dimensions.map((dimension) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+    const tableRows = data.map((row, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(distExports.TableRow, { id: `row-${index}`, hasHover: true, children: queryResponse.fields.dimensions.map((dimension) => /* @__PURE__ */ jsxRuntimeExports.jsx(
       distExports.TableCell,
       {
         variant: "text",

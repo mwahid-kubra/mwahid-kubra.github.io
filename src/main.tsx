@@ -90,7 +90,7 @@ looker.plugins.visualizations.add({
     console.log("tableHeaders", tableHeaders);
 
     const tableRows = data.map((row: any, index) => (
-      <TableRow id={`row-${index}`} key={`row-${index}`}>
+      <TableRow id={`row-${index}`} key={`row-${index}`} hasHover>
         {queryResponse.fields.dimensions.map((dimension: any) => (
           <TableCell
             key={`${dimension.name}-cell-${index}`}
