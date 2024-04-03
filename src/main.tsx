@@ -1,4 +1,5 @@
 import {
+  ForgeThemeProvider,
   Table,
   TableCell,
   TableHeader,
@@ -111,7 +112,7 @@ looker.plugins.visualizations.add({
 
     // Render to the target element
     let containerRoot = ReactDOM.createRoot(this._container);
-    containerRoot.render(table);
+    containerRoot.render(<ForgeThemeProvider>{table}</ForgeThemeProvider>);
 
     // We are done rendering! Let Looker know.
     done();
